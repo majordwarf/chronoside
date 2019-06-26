@@ -13,32 +13,31 @@ exports.collect = async user => {
     if (hours === 0) {
         return 0;
     }
-    let earnings = hours * farms[farm].earnings;
-    if (earnings > farms[farm].cap) {
-        earnings = farms[farm].cap;
+    let earnings = hours * farms[farm - 1].earnings;
+    if (earnings > farms[farm - 1].cap) {
+        earnings = farms[farm - 1].cap;
     }
-    await mysql.addBalance(user.id, earnings);
+    await mysql.addGold(user.id, earnings);
     return earnings;
 }
 
 exports.upgrade = async user => {
     let data = await mysql.getUserData(user.id, 'farm');
     let farm = data.farm;
-    if (farm >= farms.length - 1) {
+    if (farm >= farms.length) {
         return 0;
     }
     await mysql.upgradeFarm(user.id);
-    await mysql.addBalance(user.id, farms[farm + 1].price * -1);
-    return farm + 1;
+    await mysql.addGold(user.id, farms[farm].price * -1);
+    return farm;
 }
 
 exports.buy = async user => {
     let data = await mysql.getUserData(user.id, 'farm');
     let farm = data.farm;
-    if (farm === null || farm === undefined) {
-        await mysql.buyFarm(user.id);
-        await mysql.setLastCollected(user.id, time());
-        await mysql.addBalance(user.id, farms[0].price * -1);
+    if (farm === 0) {
+        await mysql.setUserData(user.id, `farm = 1, last_collected = ${time()}`);
+        await mysql.addGold(user.id, farms[0].price * -1);
         return farms[0].price;
     }
     return 0;

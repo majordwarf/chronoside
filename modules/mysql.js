@@ -63,8 +63,8 @@ exports.getUserData = (playerID, data) => {
 	});
 }
 
-exports.setUserData = (playerID, fields, data) => {
-	db.query(`UPDATE players SET ${fields} = ${data} WHERE id = ${playerID}`, (error, results) => {
+exports.setUserData = (playerID, data) => { //mysql.setUserData(playerID, 'gold = 0, farm = 2')
+	db.query(`UPDATE players SET ${data} WHERE id = ${playerID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
@@ -79,20 +79,6 @@ exports.addGold = (playerID, amount) => {
 
 exports.upgradeFarm = playerID => {
 	db.query(`UPDATE players SET farm = farm + 1 WHERE id = ${playerID}`, (error, results) => {
-		if (error) throw error;
-		return results[0];
-	});
-}
-
-exports.buyFarm = playerID => {
-	db.query(`UPDATE players SET farm = 0 WHERE id = ${playerID}`, (error, results) => {
-		if (error) throw error;
-		return results[0];
-	});
-}
-
-exports.setLastCollected = (playerID, time) => {
-	db.query(`UPDATE players SET last_collected = ${time} WHERE id = ${playerID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
