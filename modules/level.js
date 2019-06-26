@@ -31,9 +31,9 @@ exports.gainXP = (user, xpAmount) => {
     let newXP = currentXP + xpAmount;
     let newLevel = calculateLevel(newXP);
 
-    mysql.setXP(user, totalXP);
+    mysql.setUserData(user, `xp = ${totalXP}`);
     if (currentLevel != newLevel) {
-        mysql.setLevel(user, currentLevel);
+        mysql.setUserData(user, `level = ${newLevel}`);
     }
 }
 

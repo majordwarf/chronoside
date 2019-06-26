@@ -90,17 +90,3 @@ exports.getServerPrefix = server => {
 		return results[0].prefix;
 	});
 }
-
-exports.setLevel = (playerID, newLevel) => {
-	db.query(`UPDATE players SET level = ${newLevel} WHERE id = ${playerID}`, (error,results) => {
-		if (error) throw error
-		return results[0]
-	});
-}
-
-exports.setXP = (playerID, newXP) => {
-    db.query(`UPDATE players SET xp = ${newXP} WHERE id = ${playerID}`, (error, results) => {
-        if (error) throw error
-        return results[0]
-    });
-}
