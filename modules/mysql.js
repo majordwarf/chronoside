@@ -64,14 +64,12 @@ exports.getUserData = (playerID, data) => {
 }
 
 exports.setUserData = (playerID, fields, data) => {
-	for(let i=0; i<fields.length; i++) {
-		db.query(`UPDATE players SET ${fields[i]} = ${data[i]} WHERE id = ${playerID}`, (error, results) => {
-			if (error) throw error;
-			return results[0];
-		});
-	}
+	db.query(`UPDATE players SET ${fields} = ${data} WHERE id = ${playerID}`, (error, results) => {
+		if (error) throw error;
+		return results[0];
+	});
 }
-/*
+
 exports.addGold = (playerID, amount) => {
 	db.query(`UPDATE players SET gold = gold + ${amount} WHERE id = ${playerID}`, (error, results) => {
 		if (error) throw error;
@@ -79,14 +77,14 @@ exports.addGold = (playerID, amount) => {
 	});
 }
 
-exports.upgradeFarm = (playerID) => {
+exports.upgradeFarm = playerID => {
 	db.query(`UPDATE players SET farm = farm + 1 WHERE id = ${playerID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
 }
 
-exports.buyFarm = (playerID) => {
+exports.buyFarm = playerID => {
 	db.query(`UPDATE players SET farm = 0 WHERE id = ${playerID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
@@ -106,17 +104,17 @@ exports.getServerPrefix = server => {
 		return results[0].prefix;
 	});
 }
-*/
-exports.increaseLevel = (playerID, newLevel) => {
+
+exports.setLevel = (playerID, newLevel) => {
 	db.query(`UPDATE players SET level = ${newLevel} WHERE id = ${playerID}`, (error,results) => {
 		if (error) throw error
 		return results[0]
-	})
+	});
 }
 
 exports.setXP = (playerID, newXP) => {
     db.query(`UPDATE players SET xp = ${newXP} WHERE id = ${playerID}`, (error, results) => {
         if (error) throw error
         return results[0]
-    })
+    });
 }
