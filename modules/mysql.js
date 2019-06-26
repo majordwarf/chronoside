@@ -13,7 +13,7 @@ exports.setupDB = () => {
 		if (error) throw error;
 		if(results.length == 0) {
     	    db.query(`CREATE TABLE players (
-    	        id VARCHAR(40) NOT NULL,
+    	        id BIGINT NOT NULL,
     	        charname TEXT NOT NULL,
     	        class TINYTEXT NOT NULL,
     	        location VARCHAR(100) DEFAULT 'Spawn',
