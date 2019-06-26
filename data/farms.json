@@ -1,1 +1,32 @@
-
+[
+    {
+        "name": "Farm Patch",
+        "earnings": 1,
+        "price": 50,
+        "cap": 10
+    },
+    {
+        "name": "Hobby Farm",
+        "earnings": 2,
+        "price": 50,
+        "cap": 20
+    },
+    {
+        "name": "Gazebo Farm",
+        "earnings": 5,
+        "price": 100,
+        "cap": 50
+    },
+    {
+        "name": "Ranch",
+        "earnings": 8,
+        "price": 150,
+        "cap": 80
+    },
+    {
+        "name": "Factory",
+        "earnings": 15,
+        "price": 200,
+        "cap": 150
+    }
+]
