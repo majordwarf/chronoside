@@ -8,8 +8,6 @@ const db = mysql.createConnection({
 	database: config.db_name
 });
 
-
-
 /*
 	I DON"T KNOW IF THIS RUNS YET. UNTESTED! 
 */
@@ -43,10 +41,7 @@ exports.setupDB = () => {
             if (error) throw error;
             return results;
         });
-        
-
     }
-
 }
 
 /*
@@ -56,37 +51,44 @@ exports.setupDB = () => {
 
 */
 
-exports.getUserData = (playerID, data) => {
-	db.query(`SELECT ${data} FROM players WHERE id = ${playerID}`, (error, results) => {
+exports.getUserData = (userID, data) => {
+	db.query(`SELECT ${data} FROM players WHERE id = ${userID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
 }
 
-exports.setUserData = (playerID, data) => { //mysql.setUserData(playerID, 'gold = 0, farm = 2')
-	db.query(`UPDATE players SET ${data} WHERE id = ${playerID}`, (error, results) => {
+exports.setUserData = (userID, data) => { //mysql.setUserData(userID, 'gold = 0, farm = 2')
+	db.query(`UPDATE players SET ${data} WHERE id = ${userID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
 }
 
-exports.addGold = (playerID, amount) => {
-	db.query(`UPDATE players SET gold = gold + ${amount} WHERE id = ${playerID}`, (error, results) => {
+exports.updateUserData = (userID, data, num) => {
+	db.query(`UPDATE players SET ${data} = ${data} + ${num} WHERE id = ${userID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
 }
 
-exports.upgradeFarm = playerID => {
-	db.query(`UPDATE players SET farm = farm + 1 WHERE id = ${playerID}`, (error, results) => {
+exports.getGuildData = (serverID, data) => {
+	db.query(`SELECT ${data} FROM servers WHERE id = ${serverID}`, (error, results) => {
 		if (error) throw error;
 		return results[0];
 	});
 }
 
-exports.getServerPrefix = server => {
-	db.query(`SELECT prefix FROM servers WHERE id = ${server.id}`, (error, results) => {
+exports.setGuildData = (serverID, data) => { //mysql.setServerData(guildID, 'gold = 0, farm = 2')
+	db.query(`UPDATE servers SET ${data} WHERE id = ${serverID}`, (error, results) => {
 		if (error) throw error;
-		return results[0].prefix;
+		return results[0];
+	});
+}
+
+exports.updateGuildData = (serverID, data, num) => {
+	db.query(`UPDATE servers SET ${data} = ${data} + ${num} WHERE id = ${serverID}`, (error, results) => {
+		if (error) throw error;
+		return results[0];
 	});
 }

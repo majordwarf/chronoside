@@ -17,7 +17,7 @@ exports.collect = async user => {
     if (earnings > farms[farm - 1].cap) {
         earnings = farms[farm - 1].cap;
     }
-    await mysql.addGold(user.id, earnings);
+    await mysql.updateUserData(user.id, 'gold', earnings);
     return earnings;
 }
 
@@ -27,8 +27,8 @@ exports.upgrade = async user => {
     if (farm >= farms.length) {
         return 0;
     }
-    await mysql.upgradeFarm(user.id);
-    await mysql.addGold(user.id, farms[farm].price * -1);
+    await mysql.updateUserData(user.id, 'farm', 1);
+    await mysql.updateUserData(user.id, 'gold', farms[farm].price * -1);
     return farm;
 }
 
@@ -37,7 +37,7 @@ exports.buy = async user => {
     let farm = data.farm;
     if (farm === 0) {
         await mysql.setUserData(user.id, `farm = 1, last_collected = ${time()}`);
-        await mysql.addGold(user.id, farms[0].price * -1);
+        await mysql.updateUserData(user.id, 'gold', farms[0].price * -1);
         return farms[0].price;
     }
     return 0;
