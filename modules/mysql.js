@@ -13,7 +13,7 @@ exports.setupDB = () => {
 		if (error) throw error;
 		if(results.length == 0) {
     	    db.query(`CREATE TABLE players (
-    	        id BIGINT NOT NULL,
+    	        id VARCHAR(40) NOT NULL,
     	        charname TEXT NOT NULL,
     	        class TINYTEXT NOT NULL,
     	        location VARCHAR(100) DEFAULT 'Spawn',
@@ -35,6 +35,13 @@ exports.setupDB = () => {
     	        return results;
     	    });
     	}
+	});
+}
+
+exports.addUser = (userID, charName, charClass) => {
+	db.query(`INSERT INTO players (id, charname, class) VALUES (${userID}, "${charName}", "${charClass}")`, (error, results) => {
+		if (error) throw error;
+		return results[0];
 	});
 }
 
