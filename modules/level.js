@@ -14,6 +14,9 @@ let time = () => {
 	return Math.floor(new Date() / 1000);
 }
 
+let calculateLevel = xp => {
+    return Math.floor(xp / 5);
+}
 
 // Function to call when the user gains any amount of XP through any source
 exports.gainXP = (user, xpAmount) => {
@@ -22,19 +25,16 @@ exports.gainXP = (user, xpAmount) => {
     // ++ Increase user's level
     // ++ Update XP
     
-    let currentXP = mysql.getUserData('xp')
-    let currentLevel = mysql.getUserData('level')
+    let currentXP = mysql.getUserData('xp');
+    let currentLevel = mysql.getUserData('level');
 
-    let totalXP = currentXP+xpAmount;
+    let newXP = currentXP + xpAmount;
+    let newLevel = calculateLevel(newXP);
 
-    while(totalXP > currentLevel*5) {
-        totalXP = totalXP - currentLevel*5
-        currentLevel++        
+    mysql.setUserData(user, `xp = ${totalXP}`);
+    if (currentLevel != newLevel) {
+        mysql.setUserData(user, `level = ${newLevel}`);
     }
-
-    mysql.increaseLevel(user, currentLevel);
-    mysql.setXP(user, totalXP);
-    
 }
 
 exports.levelUP = (user) => {
