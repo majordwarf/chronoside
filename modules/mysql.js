@@ -9,7 +9,7 @@ const db = mysql.createConnection({
 });
 
 exports.setupDB = () => {
-    const tableCount = db.query(`SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'players'`, (error, results) => {
+    db.query(`SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE 'players'`, (error, results) => {
 		if (error) throw error;
 		if(results.length == 0) {
     	    db.query(`CREATE TABLE players (
