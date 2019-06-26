@@ -1,4 +1,8 @@
 {
-  "token": " ",
-  "prefix": "~"
+  "token": "YOUR BOT TOKEN",
+  "prefix": "~",
+  "db_host": "",
+  "db_user": "",
+  "db_password": "",
+  "db_name": ""
 }

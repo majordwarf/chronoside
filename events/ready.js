@@ -1,4 +1,4 @@
-const mysql = require('../mysql.js');
+const mysql = require('../modules/mysql.js');
 
 module.exports = async client => {
   // Log that the bot is online.
