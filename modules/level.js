@@ -31,14 +31,14 @@ exports.gainXP = async (user, xpAmount) => {
     // Check if user has leveled up
     // ++ Increase user's level
     // ++ Update XP
-    
-    let currentXP = mysql.getUserData(user, 'xp');
-    let currentLevel = mysql.getUserData(user, 'level');
+    let data = await mysql.getUserData(user.id, 'xp, level');
+    let currentXP = data.xp;
+    let currentLevel = data.level;
 
     let newXP = currentXP + xpAmount;
     let newLevel = calculateLevel(newXP);
 
-    await mysql.setUserData(user, `xp = ${newXP}`);
+    await mysql.setUserData(user.id, `xp = ${newXP}`);
     if (currentLevel != newLevel) {
         levelUP(user, newLevel);
     }
@@ -54,8 +54,10 @@ exports.gainXP = async (user, xpAmount) => {
 */
 
 exports.levelUP = async (user, newLevel) => {
-    let playerClass = mysql.getUserData('class');
-    await mysql.setUserData(user, `level = ${newLevel}`);
+    let data = await mysql.getUserData(user.id, 'class');
+    let playerClass = data.class;
+
+    await mysql.setUserData(user.id, `level = ${newLevel}`);
 
     let strMultiplier = 1;
     let agiMultiplier = 1;
@@ -83,5 +85,5 @@ exports.levelUP = async (user, newLevel) => {
             break;
     }
 
-    await mysql.setUserData(user, `str = ${strMultiplier*newLevel}, agi = ${agiMultiplier*newLevel}, int = ${intMultiplier*newLevel}`);
+    await mysql.setUserData(user.id, `str = ${strMultiplier*newLevel}, agi = ${agiMultiplier*newLevel}, int = ${intMultiplier*newLevel}`);
 }

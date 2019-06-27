@@ -4,7 +4,7 @@ exports.addItem = (user, item) => {
 	let data = await mysql.getUserData(user.id, 'backpack');
 	let backpack = data.backpack.split(',');
 	backpack.push(item);
-	mysql.setUserData(user.id, `backpack = ${backpack.join(',')}`);
+	await mysql.setUserData(user.id, `backpack = ${backpack.join(',')}`);
 	return 1;
 }
 
@@ -13,7 +13,7 @@ exports.removeItem = (user, item) => {
 	let backpack = data.backpack.split(',');
 	if (backpack.includes(item)) {
 		backpack = backpack.filter(value => value != item);
-		mysql.setUserData(user.id, `backpack = ${backpack.join(',')}`);
+		await mysql.setUserData(user.id, `backpack = ${backpack.join(',')}`);
 		return 1;
 	}
 	return 0;
@@ -35,7 +35,7 @@ exports.equip = (user, item) => {
 	let inventory = data.inventory.split(',');
 	if (backpack.includes(item)) {
 		inventory.push(item);
-		mysql.setUserData(user.id, `inventory = ${inventory.join(',')}`);
+		await mysql.setUserData(user.id, `inventory = ${inventory.join(',')}`);
 		return 1;
 	}
 	return 0;
@@ -46,7 +46,7 @@ exports.unequip = (user, item) => {
 	let inventory = data.inventory.split(',');
 	if (inventory.includes(item)) {
 		inventory = inventory.filter(value => value != item);
-		mysql.setUserData(user.id, `inventory = ${inventory.join(',')}`);
+		await mysql.setUserData(user.id, `inventory = ${inventory.join(',')}`);
 		return 1;
 	}
 	return 0;

@@ -30,12 +30,13 @@ exports.travelTo = async (user, desination) => {
     // Get distance between user's current location and destination
     // Set data (State, ArrivalTime, Desination)
     
-    let currentLocation = await mysql.getUserData(user, 'location');
+    let data = await mysql.getUserData(user.id, 'location');
+    let currentLocation = data.location;
     let hubDistance = getDistance(user, currentLocation);
     let destinationDistance = getDistance(user, destination);
     let totalDistance = hubDistance + destinationDistance;
 
     let arrivalTime = new Date(Date.now() + totalDistance * 60 * 1000);
-    await mysql.setUserData(user, `state = travel, stateFinishTime = ${arrivalTime}, destination = ${destination}`);
+    await mysql.setUserData(user.id, `state = travel, stateFinishTime = ${arrivalTime}, destination = ${destination}`);
 
 }
