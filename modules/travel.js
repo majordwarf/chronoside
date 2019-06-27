@@ -15,7 +15,7 @@ const cities = require('../data//cities.json');
 */
 
 let time = () => {
-	return Math.floor(new Date() / 1000);
+    return Math.floor(new Date() / 1000);
 }
 
 // Returns the distance
@@ -36,7 +36,7 @@ exports.travelTo = async (user, desination) => {
     let destinationDistance = getDistance(user, destination);
     let totalDistance = hubDistance + destinationDistance;
 
-    let arrivalTime = new Date(Date.now() + totalDistance * 60 * 1000);
+    let arrivalTime = time() + (totalDistance * 60);
     await mysql.setUserData(user.id, `state = travel, stateFinishTime = ${arrivalTime}, destination = ${destination}`);
 
 }
