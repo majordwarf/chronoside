@@ -38,7 +38,7 @@ exports.gainXP = async (user, xpAmount) => {
     let newXP = currentXP + xpAmount;
     let newLevel = calculateLevel(newXP);
 
-    mysql.setUserData(user, `xp = ${newXP}`);
+    await mysql.setUserData(user, `xp = ${newXP}`);
     if (currentLevel != newLevel) {
         levelUP(user, newLevel);
     }
@@ -53,7 +53,7 @@ exports.gainXP = async (user, xpAmount) => {
 
 */
 
-exports.levelUP = (user, newLevel) => {
+exports.levelUP = async (user, newLevel) => {
     let playerClass = mysql.getUserData('class');
     await mysql.setUserData(user, `level = ${newLevel}`);
 

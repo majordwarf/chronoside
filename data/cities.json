@@ -1,0 +1,11 @@
+{
+    "CityA": {
+        "dist": "5"
+    },
+    "CityB": {
+        "dist": "7"
+    }
+    "CityC": {
+        "dist": "1"
+    }
+}

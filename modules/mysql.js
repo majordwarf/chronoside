@@ -19,6 +19,7 @@ exports.setupDB = () => {
                     charname TEXT NOT NULL,
                     class TINYTEXT NOT NULL,
                     location VARCHAR(100) DEFAULT 'Spawn',
+                    destination VARCHAR(100) DEFAULT 'Spawn',
                     str SMALLINT DEFAULT '5',
                     agi SMALLINT DEFAULT '5',
                     intel SMALLINT DEFAULT '5',
