@@ -63,6 +63,7 @@ module.exports.run = async(client, message, args) => {
         });
         reactions.on('collect', async(reaction, reactions) => {
             console.log('got a reaction');
+            console.log(reaction.count);
             if (reaction.emoji.name === '😛' && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a warrior with id ${userID}`);
                 mysql.addUser(userID, args[1], "Warrior");
