@@ -3,9 +3,10 @@ const farm = require('../modules/farm.js');
 const farms = require('../data/farms.json');
 
 module.exports.run = async(client, message, args) => {
+    let data;
 	switch(args[1]) {
         case "collect":
-            let data = await mysql.getUserData(message.author.id, 'farm');
+            data = await mysql.getUserData(message.author.id, 'farm');
             if(data.farm == 0) {
                 await message.channel.send('You do not have a farm! Use the farm buy command to buy a farm!');
             } else {
@@ -14,7 +15,7 @@ module.exports.run = async(client, message, args) => {
             }
             break;
         case "buy":
-            let data = await mysql.getUserData(message.author.id, 'farm, balance');
+            data = await mysql.getUserData(message.author.id, 'farm, balance');
             if(data.farm == 0) {
                 if(data.balance < farms[0].price) {
                     await message.channel.send('You do not have enough gold to buy a farm!');
@@ -27,7 +28,7 @@ module.exports.run = async(client, message, args) => {
             }
             break;
         case "upgrade":
-            let data = await mysql.getUserData(message.author.id, 'farm, balance');
+            data = await mysql.getUserData(message.author.id, 'farm, balance');
             if(data.balance < farms[data.farm].price) {
                 await message.channel.send('You cannot afford to upgrade your farm!');
             } else {
