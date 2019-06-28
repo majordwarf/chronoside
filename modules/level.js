@@ -66,7 +66,7 @@ let levelUp = async(message, user, newLevel) => {
             "description": desc,
             "color": 580271,
             "thumbnail": {
-                "url": "https://media.discordapp.net/attachments/592199620231299088/594063795572178964/Character.png"
+                "url": "https://media.discordapp.net/attachments/592199620231299088/594246276279697408/UP.png"
             },
             "author": {
                 "name": "Chronoside Bot",
@@ -97,7 +97,7 @@ exports.gainXP = async(message, user, xpAmount) => {
             "description": desc,
             "color": 580271,
             "thumbnail": {
-                "url": "https://media.discordapp.net/attachments/592199620231299088/594063795572178964/Character.png"
+                "url": "https://media.discordapp.net/attachments/592199620231299088/594246278720782346/XP.png"
             },
             "author": {
                 "name": "Chronoside Bot",
