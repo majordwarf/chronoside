@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
 
   // WIP: Check if the state of the user has finished (if not idle)!
   console.log("State check INC")
-  stateChecker.stateCheck(message.author, Math.floor(new Date()/1000));
+  stateChecker.stateCheck(message, Math.floor(new Date()/1000));
   console.log("State check OUT")
   await cmd.run(client, message, args);
 };
