@@ -56,6 +56,6 @@ exports.stateCheck = async (user, cmdTime) => {
 
 */
 
-exports.levelUP = async (user, newLevel) => {
-   levelUp(user, newLevel);
+exports.levelUP = async (message, user, newLevel) => {
+   levelUp(message, user, newLevel);
 }

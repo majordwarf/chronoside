@@ -12,7 +12,7 @@ const mysql = require('./mysql.js');
 */
 
 let time = () => {
-	return Math.floor(new Date() / 1000);
+    return Math.floor(new Date() / 1000);
 }
 
 // Returns the level based on total XP
@@ -22,10 +22,10 @@ let calculateLevel = xp => {
 
 // Function that returns the XP required to reach a certain level. For future use!
 let xpRequired = level => {
-    return Math.round((4* (level^3)) / 5);
+    return Math.round((4 * (level ^ 3)) / 5);
 }
 
-let levelUp = async (user, newLevel) => {
+let levelUp = async(message, user, newLevel) => {
     let data = await mysql.getUserData(user.id, 'class');
     let playerClass = data.class;
 
@@ -35,7 +35,7 @@ let levelUp = async (user, newLevel) => {
     let agiMultiplier = 1;
     let intMultiplier = 1;
 
-    switch(playerClass) {
+    switch (playerClass) {
         case 'Warrior':
             strMultiplier = 3;
             break;
@@ -59,10 +59,26 @@ let levelUp = async (user, newLevel) => {
     console.log("newLevel = " + newLevel);
     console.log("Multipliers (str, agi, int)" + strMultiplier + " " + agiMultiplier + " " + intMultiplier);
     await mysql.setUserData(user.id, `str = ${strMultiplier*newLevel}, agi = ${agiMultiplier*newLevel}, intel = ${intMultiplier*newLevel}`);
+    desc = `${user} gained new level! Level ${newLevel}!`
+    levelUpMsg = {
+        "embed": {
+            "title": "Level Up!",
+            "description": desc,
+            "color": 580271,
+            "thumbnail": {
+                "url": "https://media.discordapp.net/attachments/592199620231299088/594063795572178964/Character.png"
+            },
+            "author": {
+                "name": "Chronoside Bot",
+                "url": ""
+            }
+        }
+    }
+    await message.channel.send(levelUpMsg);
 }
 
 // Function to call when the user gains any amount of XP through any source
-exports.gainXP = async (user, xpAmount) => {
+exports.gainXP = async(message, user, xpAmount) => {
     // Add XP amount to user's current XP
     // Check if user has leveled up
     // ++ Increase user's level
@@ -74,9 +90,26 @@ exports.gainXP = async (user, xpAmount) => {
     let newXP = parseInt(currentXP) + parseInt(xpAmount);
     let newLevel = calculateLevel(newXP);
 
+    desc = `${user} gained ${xpAmount}XP!`
+    levelUpMsg = {
+        "embed": {
+            "title": "XP Gain!",
+            "description": desc,
+            "color": 580271,
+            "thumbnail": {
+                "url": "https://media.discordapp.net/attachments/592199620231299088/594063795572178964/Character.png"
+            },
+            "author": {
+                "name": "Chronoside Bot",
+                "url": ""
+            }
+        }
+    }
+    await message.channel.send(levelUpMsg);
+
     await mysql.setUserData(user.id, `xp = ${newXP}`);
     if (currentLevel != newLevel) {
-        levelUp(user, newLevel);
+        levelUp(message, user, newLevel);
     }
 }
 
@@ -89,6 +122,6 @@ exports.gainXP = async (user, xpAmount) => {
 
 */
 
-exports.levelUP = async (user, newLevel) => {
-   levelUp(user, newLevel);
+exports.levelUP = async(message, user, newLevel) => {
+    levelUp(message, user, newLevel);
 }
