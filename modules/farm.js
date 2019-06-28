@@ -18,6 +18,7 @@ exports.collect = async user => {
         earnings = farms[farm - 1].cap;
     }
     await mysql.updateUserData(user.id, 'gold', earnings);
+    await mysql.setUserData(user.id, `last_collected = ${time()}`);
     return earnings;
 }
 
