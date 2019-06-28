@@ -38,7 +38,7 @@ exports.stateCheck = async(message, cmdTime) => {
                 break;
             case "travel":
                 console.log("Travel finished");
-                traveljs.finish(user);
+                traveljs.finish(user, message);
                 break;
         }
         // Reset state to idle
