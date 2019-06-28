@@ -1,5 +1,5 @@
 const mysql = require('./mysql.js');
-const cities = require('../data//cities.json');
+const cities = require('../data/cities.json');
 
 /*
 
