@@ -27,7 +27,7 @@ let getDistance = (user, destination) => {
 exports.travelTo = async (user, destination) => {
     // Get distance between user's current location and destination
     // Set data (State, ArrivalTime, Desination)
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'location');
         let currentLocation = data.location;
         let hubDistance = getDistance(user, currentLocation);

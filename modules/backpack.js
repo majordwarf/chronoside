@@ -1,7 +1,7 @@
 const mysql = require('./mysql.js');
 
 exports.addItem = (user, item) => {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		let data = await mysql.getUserData(user.id, 'backpack');
 		let backpack = data.backpack.split(',');
 		backpack.push(item);
@@ -11,7 +11,7 @@ exports.addItem = (user, item) => {
 }
 
 exports.removeItem = (user, item) => {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		let data = await mysql.getUserData(user.id, 'backpack');
 		let backpack = data.backpack.split(',');
 		if (backpack.includes(item)) {
@@ -24,21 +24,21 @@ exports.removeItem = (user, item) => {
 }
 
 exports.getBackpack = user => {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		let data = await mysql.getUserData(user.id, 'backpack');
 		resolve(data.backpack.split(','));
 	});
 }
 
 exports.getInventory = user => {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		let data = await mysql.getUserData(user.id, 'inventory');
 		resolve(data.inventory.split(','));
 	});
 }
 
 exports.equip = (user, item) => {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		let data = await mysql.getUserData(user.id, 'backpack, inventory');
 		let backpack = data.backpack.split(',');
 		let inventory = data.inventory.split(',');
@@ -52,7 +52,7 @@ exports.equip = (user, item) => {
 }
 
 exports.unequip = (user, item) => {
-	return new Promise((resolve, reject) => {
+	return new Promise(async (resolve, reject) => {
 		let data = await mysql.getUserData(user.id, 'inventory');
 		let inventory = data.inventory.split(',');
 		if (inventory.includes(item)) {

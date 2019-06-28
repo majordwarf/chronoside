@@ -6,7 +6,7 @@ let time = () => {
 }
 
 exports.collect = async user => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'farm, last_collected');
         let farm = data.farm;
         let last_collected = data.last_collected;
@@ -25,7 +25,7 @@ exports.collect = async user => {
 }
 
 exports.upgrade = async user => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'farm');
         let farm = data.farm;
         if (farm >= farms.length) {
@@ -38,7 +38,7 @@ exports.upgrade = async user => {
 }
 
 exports.buy = async user => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'farm');
         let farm = data.farm;
         if (farm === 0) {
