@@ -42,3 +42,13 @@ exports.travelTo = async (user, destination) => {
     await mysql.setUserData(user.id, `state = "${newState}", stateFinishTime = ${arrivalTime}, destination = "${destination}"`);
 
 }
+
+exports.finish = async(user) => {
+  
+  // Code to execute once user finishes travel
+  let data = await mysql.getUserData(user.id, 'location, destination');
+  let currentLocation = data.location;
+  let arrivalDestination = data.destination;
+  // REQUIRED! Syncs up the location after travel is finished!
+  await mysql.setUserData(user.id, `location = "${arrivalDestination}", destination = "${arrivalDestination}"`);
+}

@@ -56,12 +56,12 @@ exports.beginAdventure = async (user) => {
     let destination = currentLocation;
 
     // Dungeon details
-    console.log("Entering dungeon: " + dungeonToEnter.name + " \n Level: " + dungeonToEnter.dungeonLevel + "\n Probability to success: " + calculateProbability(userLevel, dungeonToEnter.level) );
+    console.log("Entering dungeon: " + dungeonToEnter.name + " \n Level: " + dungeonToEnter.level + "\n Probability to success: " + calculateProbability(userLevel, dungeonToEnter.level) );
     
     let timeToComplete = dungeonToEnter.level *2;
 
     let arrivalTime = time() + (timeToComplete * 60);
-    await mysql.setUserData(user.id, `state = adventure, stateFinishTime = ${arrivalTime}, destination = ${destination}`);
+    await mysql.setUserData(user.id, `state = "adventure", stateFinishTime = ${arrivalTime}, destination = "${destination}"`);
 
 }
 
@@ -77,10 +77,10 @@ exports.finish = async(user) => {
 
 
     let requiredProb = calculateProbability(userLevel, dungeonToEnter.level);
-    let goldEarned = getGoldReward(userLevel, dungeonLevel);
-    let xpEarned = getXPReward(userLevel, dungeonLevel);
+    let goldEarned = getGoldReward(userLevel, dungeonToEnter.level);
+    let xpEarned = getXPReward(userLevel, dungeonToEnter.level);
 
-    if(Math.random()>requiredProb) {
+    if(Math.random()<=requiredProb) {
         // Indicates success!
         
         // Add gold reward!
@@ -93,7 +93,6 @@ exports.finish = async(user) => {
         console.log("You failed! Try next time!");
     }
 
-    // Change the state back to idle
-    await mysql.setUserData(user.id, `state = idle, stateFinishTime = ${time}, destination = ${destination}`);
+    // Change the state back to idle - MOVED TO STATE FINISH SYSTEM!
 
 }
