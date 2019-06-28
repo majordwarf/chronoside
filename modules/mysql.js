@@ -32,6 +32,7 @@ exports.setupDB = () => {
                     lastCollected DATETIME,
                     inventory VARCHAR(100),
                     backpack VARCHAR(100),
+                    embed_id BIGINT NOT NULL,
                     PRIMARY KEY (id)
                     );`, (error, results) => {
                     if (error) {
