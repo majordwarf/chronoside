@@ -44,18 +44,4 @@ exports.stateCheck = async(message, cmdTime) => {
         // Reset state to idle
         await mysql.setUserData(user.id, `state = "idle", stateFinishTime= ${time()}, destination = "nowhere"`);
     }
-
-}
-
-/*
-
-    STAT SYSTEM:
-    Basically, it will be level*multiplier based on the class. each class has 1 primary attribute and may have 1 secondary.
-    The sum of multiplier will always be 5. Hence, at level 10, player will have 50 total stats distributed based on their class.
-    Feel free to suggest if we want to use a different system!
-
-*/
-
-exports.levelUP = async(message, user, newLevel) => {
-    levelUp(message, user, newLevel);
 }
