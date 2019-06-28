@@ -26,7 +26,7 @@ let getDistance = (user, destination) => {
 
 
 // Function to call when the user gives !travel command
-exports.travelTo = async (user, desination) => {
+exports.travelTo = async (user, destination) => {
     // Get distance between user's current location and destination
     // Set data (State, ArrivalTime, Desination)
     
@@ -37,6 +37,8 @@ exports.travelTo = async (user, desination) => {
     let totalDistance = hubDistance + destinationDistance;
 
     let arrivalTime = time() + (totalDistance * 60);
-    await mysql.setUserData(user.id, `state = travel, stateFinishTime = ${arrivalTime}, destination = ${destination}`);
+    console.log("USER ID: " + user.id);
+    let newState = "travel"
+    await mysql.setUserData(user.id, `state = "${newState}", stateFinishTime = ${arrivalTime}, destination = "${destination}"`);
 
 }
