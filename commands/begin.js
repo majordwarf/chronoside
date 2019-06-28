@@ -56,7 +56,7 @@ module.exports.run = async(client, message, args) => {
         await classMess.react("😛");
         await classMess.react("🤔");
 
-        let reactions = await classMess.createReactionCollector(r => r.emoji = "😛" || "🤔", {
+        let reactions = await classMess.createReactionCollector(r => r.emoji = ("😛" || "🤔") && r.users.size > 1, {
             max: 1,
             time: 12000,
             errors: ['time']
@@ -78,7 +78,7 @@ module.exports.run = async(client, message, args) => {
         });
 
     } else {
-        message.author.send("User Already Exist!");
+        message.author.send("You have already begun your journey!");
     }
 };
 
