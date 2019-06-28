@@ -27,7 +27,7 @@ exports.setupDB = () => {
                     xp INT unsigned DEFAULT '0',
                     gold INT DEFAULT '0',
                     state VARCHAR(100) DEFAULT 'idle',
-                    stateFinishTime DATETIME,
+                    stateFinishTime VARCHAR(25),
                     farm INT,
                     lastCollected DATETIME,
                     inventory VARCHAR(100),

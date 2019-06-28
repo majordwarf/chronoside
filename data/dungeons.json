@@ -1,0 +1,14 @@
+{
+    "CityA": {
+        "name": "Burnt Armory",
+        "level": "1"
+    },
+    "CityB": {
+        "name": "Overgrown Paradise",
+        "level": "2"
+    },
+    "CityC": {
+        "name": "Mountain Chambers",
+        "level": "3"
+    }
+}

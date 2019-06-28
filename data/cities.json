@@ -4,8 +4,11 @@
     },
     "CityB": {
         "dist": "7"
-    }
+    },
     "CityC": {
         "dist": "1"
+    },
+    "Spawn": {
+        "dist": "0"
     }
 }
