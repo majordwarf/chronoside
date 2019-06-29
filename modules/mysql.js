@@ -61,9 +61,9 @@ exports.checkUserExists = userID => {
     });
 }
 
-exports.addUser = (userID, charName, charClass, embedId) => {
+exports.addUser = (userID, charName, charClass) => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO players (id, charname, class, embed_id) VALUES (${userID}, "${charName}", "${charClass}", ${embedId})`, (error, results) => {
+        db.query(`INSERT INTO players (id, charname, class) VALUES (${userID}, "${charName}", "${charClass}")`, (error, results) => {
             if (error) {
                 reject(error);
             } else {

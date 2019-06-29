@@ -34,8 +34,8 @@ module.exports.run = async(client, message, args) => {
         }
     }
 
-    userID = message.author.id
-    exist = await mysql.getUserData(userID, "id")
+    let userID = message.author.id
+    let exist = await mysql.getUserData(userID, "id")
 
     if (exist === undefined) {
         await message.author.send(storyMsg)
@@ -61,44 +61,42 @@ module.exports.run = async(client, message, args) => {
         });
         reactions.on('collect', async(reaction, reactions) => {
             let userClass = "";
-            if (reaction.emoji.name === '593699121852973078' && reaction.count > 1) {
+            if (reaction.emoji.id == 593699121852973078 && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Warrior!`);
                 userClass = "Warrior";
-            } else if (reaction.emoji.name === '593699122289180686' && reaction.count > 1) {
+            } else if (reaction.emoji.id == 593699122289180686 && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Archer!`);
                 userClass = "Archer";
-            } else if (reaction.emoji.name === '593699122305826816' && reaction.count > 1) {
+            } else if (reaction.emoji.id == 593699122305826816 && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Cleric!`);
                 userClass = "Cleric";
-            } else if (reaction.emoji.name === '593699122440175616' && reaction.count > 1) {
+            } else if (reaction.emoji.name == 593699122440175616 && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Wizard!`);
                 userClass = "Wizard";
-            } else if (reaction.emoji.name === '593699122238717962' && reaction.count > 1) {
+            } else if (reaction.emoji.name == 593699122238717962 && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Rogue!`);
                 userClass = "Rogue";
             }
 
             let finishEmbed = {
-                    "embed": {
-                        "title": "You escape!",
-                        "description": "You fight bravely but the dragon was too powerful! You decide to escape the scene and travel to the nearest safe city for help.",
-                        "color": 16711680,
-                        "author": {
-                            "name": "Chronoside Bot",
-                            "url": ""
-                        },
-                        "fields": [
-                            {
-                                "name": "Welcome!",
-                                "value": 'You have begun your journey! We wish you the best of luck! Now what do you do? Well, let me show you around.\nThe first thing you may want to do is travel from the spawn area. You will not find dungeons and enemies in spawn. To do this, type `' + prefix + 'travel (cityname)` You can get a list of the cities by typing `' + prefix + 'map`\n'
-                            }
-                        ]
-                    }
+                "embed": {
+                    "title": "You escape!",
+                    "description": "You fight bravely but the dragon was too powerful! You decide to escape the scene and travel to the nearest safe city for help.",
+                    "color": 16711680,
+                    "author": {
+                        "name": "Chronoside Bot",
+                        "url": ""
+                    },
+                    "fields": [{
+                        "name": "Welcome!",
+                        "value": 'You have begun your journey! We wish you the best of luck! Now what do you do? Well, let me show you around.\nThe first thing you may want to do is travel from the spawn area. You will not find dungeons and enemies in spawn. To do this, type `' + prefix + 'travel (cityname)` You can get a list of the cities by typing `' + prefix + 'map`\n'
+                    }]
                 }
+            }
 
             let infoEmbed = {
                 "embed": {
-                    "title": `${userClass}`,
+                    "title": userClass,
                     "color": 16711680,
                     "thumbnail": {
                         "url": "https://media.discordapp.net/attachments/592199620231299088/594063795572178964/Character.png"
@@ -107,27 +105,23 @@ module.exports.run = async(client, message, args) => {
                         "name": `${args[1]}'s profile`,
                         "url": ""
                     },
-                    "fields": [
-                        {
-                            "name": "Progress",
-                            "value": `Level: 1\nXP: 0\nArea: Spawn`,
-                            "inline": true
-                        },
-                        {
-                            "name": "Gold",
-                            "value": "<:Coin:593699122473730063>: 0"
-                        },
-                        {
-                            "name": "Inventory",
-                            "value": "No items"
-                        }
-                    ]
+                    "fields": [{
+                        "name": "Progress",
+                        "value": `Level: 1\nXP: 0\nArea: Spawn`,
+                        "inline": true
+                    }, {
+                        "name": "Gold",
+                        "value": "<:Coin:593699122473730063>: 0"
+                    }, {
+                        "name": "Inventory",
+                        "value": "No items"
+                    }]
                 }
             }
 
             let finishEmbedMsg = await classMess.channel.send(finishEmbed);
             let infoEmbedMsg = await classMess.channel.send(infoEmbed);
-            mysql.addUser(userID, args[1], userClass, infoEmbedMsg.id);
+            mysql.addUser(userID, args[1], userClass);
         });
     } else {
         message.author.send("You have already begun your journey!");
