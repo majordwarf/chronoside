@@ -1,5 +1,6 @@
 const mysql = require('../modules/mysql.js');
 const cities = require('../data/cities.json');
+const traveljs = require('../modules/travel.js');
 
 module.exports.run = async(client, message, args) => {
 	if(!cities[args[0]]) {
