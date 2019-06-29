@@ -62,21 +62,36 @@ module.exports.run = async(client, message, args) => {
             errors: ['time']
         });
         reactions.on('collect', async(reaction, reactions) => {
-            console.log('got a reaction');
-            console.log(reaction.count);
+            let userClass;
             if (reaction.emoji.name === '😛' && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a warrior with id ${userID}`);
-                mysql.addUser(userID, args[1], "Warrior");
+                userClass = "Warrior";
             } else if (reaction.emoji.name === '🤔' && reaction.count > 1) {
                 await classMess.reply('you are a rouge.');
-                mysql.addUser(userID, args[1], "Rouge");
+                userClass = "Rouge";
             }
-        });
+            let infoEmbed = {
+                "embed": {
+                    "title": "big embed for info (change this later)",
+                    "description": "test test test",
+                    "color": 16711680,
+                    "image": {
+                        "url": "https://cdn.discordapp.com/embed/avatars/0.png"
+                    },
+                    "author": {
+                        "name": "Chronoside Bot",
+                        "url": ""
+                    },
+                    "fields": [{
+                        "name": "info!",
+                        "value": "idk testing i guess"
+                    }]
+                }
+            }
 
-        reactions.on('end', collected => {
-            console.log(`collected ${collected.size} reactions`);
+            let infoEmbedMsg = await classMess.channel.send(infoEmbed);
+            mysql.addUser(userID, args[1], userClass, infoEmbedMsg.id);
         });
-
     } else {
         message.author.send("You have already begun your journey!");
     }
