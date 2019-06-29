@@ -73,19 +73,22 @@ module.exports.run = async(client, message, args) => {
             }
             let infoEmbed = {
                 "embed": {
-                    "title": "big embed for info (change this later)",
-                    "description": "test test test",
+                    "title": `${userClass}`,
                     "color": 16711680,
-                    "image": {
-                        "url": "https://cdn.discordapp.com/embed/avatars/0.png"
+                    "thumbnail": {
+                        "url": "https://media.discordapp.net/attachments/592199620231299088/594063795572178964/Character.png"
                     },
                     "author": {
-                        "name": "Chronoside Bot",
+                        "name": `${args[1]}'s profile`,
                         "url": ""
                     },
                     "fields": [{
-                        "name": "info!",
-                        "value": "idk testing i guess"
+                        "name": "Progress",
+                        "value": `Level: 1\nXP: 0\nArea: CityA`,
+                        "inline": true
+                    }, {
+                        "name": "Money",
+                        "value": "<:Coin:593699122473730063>: 0"
                     }]
                 }
             }

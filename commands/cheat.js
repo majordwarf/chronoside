@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args) => {
             break;
         case "gaingold":
             if(!isNaN(args[1])) {
-                await mysql.updateUserData(user.id, 'gold', args[1]);
+                await mysql.updateUserData(player.id, 'gold', args[1]);
                 message.channel.send(`You have gained ${args[1]} gold!`);
             } else {
                 message.channel.send('Gold must be a valid number!');
