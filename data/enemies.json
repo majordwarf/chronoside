@@ -1,0 +1,33 @@
+{
+    "Ancient Mummy": {
+        "name": "Ancient Mummy",
+        "level": "1",
+        "xp": "10",
+        "sprite": "https://media.discordapp.net/attachments/592199620231299088/594251742213046285/SwampMonster.png"
+    },
+    "Big Goblin": {
+        "name": "Big Goblin",
+        "level": "2",
+        "xp": "20",
+        "sprite": "https://media.discordapp.net/attachments/592199620231299088/594251742213046285/SwampMonster.png"
+    },
+    "Crazy Monkey": {
+        "name": "Crazy Monkey",
+        "level": "3",
+        "xp": "20",
+        "sprite": "https://media.discordapp.net/attachments/592199620231299088/594251742213046285/SwampMonster.png"
+    },
+    "Double Magician": {
+        "name": "Double Magician",
+        "level": "4",
+        "xp": "40",
+        "sprite": "https://media.discordapp.net/attachments/592199620231299088/594251742213046285/SwampMonster.png"
+    },
+    "Elastic Snake": {
+        "name": "Elastic Snake",
+        "level": "5",
+        "xp": "50",
+        "sprite": "https://media.discordapp.net/attachments/592199620231299088/594251742213046285/SwampMonster.png"
+    }
+  
+}
