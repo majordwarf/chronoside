@@ -106,13 +106,13 @@ exports.gainXP = async(message, user, xpAmount) => {
     }
     await message.channel.send(levelUpMsg);
 
-    let embedMsg = await EmbedManager.get(user);
+   /* let embedMsg = await EmbedManager.get(user);
     let embed = embedMsg.embeds[0];
     let values = embed.fields[0].value.split('\n');
     values[0] = `Level: ${newLevel}`;
     values[1] = `XP: ${newXP}`;
     embed.fields[0].value = values.join('\n');
-    await EmbedManager.edit(user, embed);
+    await EmbedManager.edit(user, embed);*/
 
     await mysql.setUserData(user.id, `xp = ${newXP}`);
     if (currentLevel != newLevel) {
@@ -122,21 +122,13 @@ exports.gainXP = async(message, user, xpAmount) => {
 
 exports.gainGold = async(user, goldAmount) => {
     await mysql.updateUserData(user.id, 'gold', goldAmount);
+    /*
     let data = await mysql.getUserData(user.id, 'gold');
     let embedMsg = await EmbedManager.get(user);
     let embed = embedMsg.embeds[0];
     embed.fields[1].value = `<:Coin:593699122473730063>: ${data.gold}`;
-    await EmbedManager.edit(user, embed);
+    await EmbedManager.edit(user, embed);*/
 }
-
-/*
-
-    STAT SYSTEM:
-    Basically, it will be level*multiplier based on the class. each class has 1 primary attribute and may have 1 secondary.
-    The sum of multiplier will always be 5. Hence, at level 10, player will have 50 total stats distributed based on their class.
-    Feel free to suggest if we want to use a different system!
-
-*/
 
 exports.levelUP = async(message, user, newLevel) => {
     levelUp(message, user, newLevel);

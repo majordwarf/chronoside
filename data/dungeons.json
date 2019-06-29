@@ -1,15 +1,15 @@
 {
-    "CityA": {
+    "erysall": {
         "name": "Burnt Armory",
         "level": "1",
         "sprite": "https://cdn.discordapp.com/attachments/592199620231299088/592277293842300939/Untitled-2.gif"
     },
-    "CityB": {
+    "qrita": {
         "name": "Overgrown Paradise",
         "level": "2",
         "sprite": "https://cdn.discordapp.com/attachments/592199620231299088/592277293842300939/Untitled-2.gif"
     },
-    "CityC": {
+    "calbury": {
         "name": "Mountain Chambers",
         "level": "3",
         "sprite": "https://cdn.discordapp.com/attachments/592199620231299088/592277293842300939/Untitled-2.gif"

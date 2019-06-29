@@ -64,18 +64,22 @@ exports.finish = async(user, message) => {
             }
         }
     });
+    /*
     let embedMsg = await EmbedManager.get(user);
     let embed = embedMsg.embeds[0];
     let values = embed.fields[0].value.split('\n');
     values[2] = `Area: ${arrivalDestination}`;
     await EmbedManager.edit(user, embed);
+    */
 }
 
 exports.cheat = async (user, destination) => {
     await mysql.setUserData(user.id, `location = "${destination}", destination = "${destination}"`);
+    /*
     let embedMsg = await EmbedManager.get(user);
     let embed = embedMsg.embeds[0];
     let values = embed.fields[0].value.split('\n');
     values[2] = `Area: ${destination}`;
     await EmbedManager.edit(user, embed);
+    */
 }

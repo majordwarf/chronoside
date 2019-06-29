@@ -63,7 +63,12 @@ let result = (message, prob) => {
 
 
 exports.beginAdventure = async(message, user) => {
-    let data = await mysql.getUserData(user.id, 'location, level');
+    
+    let data = await mysql.getUserData(user.id, 'location, level, state');
+    let currentState = data.state;
+    if(currentState!="idle") {
+      return;
+    }
     let currentLocation = data.location;
     let userLevel = data.level;
     let dungeonToEnter = getDungeon(currentLocation);
@@ -71,7 +76,7 @@ exports.beginAdventure = async(message, user) => {
     let timeToComplete = dungeonToEnter.level * 2;
 
     let arrivalTime = time() + (timeToComplete * 60);
-    let successChance = Math.round(calculateProbability(userLevel, dungeont.level)*100);
+    let successChance = Math.round(calculateProbability(userLevel, dungeonToEnter.level)*100);
     let msg = {
         "embed": {
           "title": "Adventure",
@@ -92,7 +97,7 @@ exports.beginAdventure = async(message, user) => {
             },
             {
             "name": "Completion time",
-            "value": "You will complete the adventure in " + Math.round(arrivaTime - time()/60) + " minutes!",
+            "value": "You will complete the adventure in " + Math.round((arrivalTime - time())/60) + " minutes!",
             "inline": true
             }
           ]
