@@ -17,7 +17,7 @@ module.exports.run = async(client, message, args) => {
         case "buy":
             data = await mysql.getUserData(message.author.id, 'farm, gold');
             if(data.farm == 0) {
-                if(data.balance < farms[0].price) {
+                if(data.gold < farms[0].price) {
                     await message.channel.send('You do not have enough gold to buy a farm!');
                 } else {
                     await farm.buy(message.author);
@@ -31,7 +31,7 @@ module.exports.run = async(client, message, args) => {
             data = await mysql.getUserData(message.author.id, 'farm, gold');
             if(data.farm >= farms.length) {
                 await message.channel.send('You already have the best farm!');
-            } else if(data.balance < farms[data.farm].price) {
+            } else if(data.gold < farms[data.farm].price) {
                 await message.channel.send('You cannot afford to upgrade your farm!');
             } else {
                 let newFarm = await farm.upgrade(message.author);
