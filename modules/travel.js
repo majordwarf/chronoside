@@ -30,7 +30,8 @@ exports.travelTo = async(user, destination) => {
     // Set data (State, ArrivalTime, Desination)
     return new Promise(async(resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'location, state');
-        if (state == "idle") {
+        let currentState = data.state;
+        if (currentstate == "idle") {
             return;
         }
         let currentLocation = data.location;
