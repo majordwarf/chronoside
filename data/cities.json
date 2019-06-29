@@ -1,17 +1,17 @@
 {
-    "CityA": {
+    "erysall": {
         "dist": "5",
         "enemies": ["Ancient Mummy", "Crazy Monkey", "Elastic Snake"]
     },
-    "CityB": {
+    "qrita": {
         "dist": "7",
         "enemies": ["Big Goblin", "Double Magician"]
     },
-    "CityC": {
+    "calbury": {
         "dist": "1",
         "enemies": ["Crazy Monkey"]
     },
-    "Spawn": {
+    "spawn": {
         "dist": "0",
         "enemies": []
     }
