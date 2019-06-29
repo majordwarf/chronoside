@@ -1,6 +1,7 @@
 const mysql = require('../modules/mysql.js');
 
 module.exports.run = async(client, message, args) => {
+    const prefix = client.config.prefix;
     storyMsg = {
         "embed": {
             "title": "The New Dawn",
@@ -15,7 +16,7 @@ module.exports.run = async(client, message, args) => {
             },
             "fields": [{
                 "name": "Enter your name to continue :",
-                "value": "```!name username```"
+                "value": '```' + prefix + 'name username```'
             }]
         }
     }
@@ -44,7 +45,7 @@ module.exports.run = async(client, message, args) => {
 
     if (exist === undefined) {
         await message.author.send(storyMsg)
-        let nameMess = await message.author.dmChannel.awaitMessages(m => m.content.startsWith('!name'), {
+        let nameMess = await message.author.dmChannel.awaitMessages(m => m.content.startsWith(`${prefix}name`), {
             maxMatches: 1,
             time: 30000,
             errors: ['time']

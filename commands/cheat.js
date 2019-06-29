@@ -2,6 +2,7 @@ const leveljs = require('../modules/level.js');
 const adventurejs = require('../modules/adventure.js');
 const traveljs = require('../modules/travel.js');
 const cities = require('../data/cities.json');
+const mysql = require('../modules/mysql.js');
 
 module.exports.run = async (client, message, args) => {
     let command = args[0];
@@ -23,6 +24,14 @@ module.exports.run = async (client, message, args) => {
             } else {
                 traveljs.cheat(player, args[1]);
                 message.channel.send(`You are now in ${args[1]}!`);
+            }
+            break;
+        case "gaingold":
+            if(!isNaN(args[1])) {
+                await mysql.updateUserData(user.id, 'gold', args[1]);
+                message.channel.send(`You have gained ${args[1]} gold!`);
+            } else {
+                message.channel.send('Gold must be a valid number!');
             }
             break;
     }
