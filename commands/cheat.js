@@ -3,6 +3,7 @@ const adventurejs = require('../modules/adventure.js');
 const traveljs = require('../modules/travel.js');
 const cities = require('../data/cities.json');
 const mysql = require('../modules/mysql.js');
+const battlejs = require('../modules/battle.js');
 
 module.exports.run = async (client, message, args) => {
     let command = args[0];
@@ -33,6 +34,9 @@ module.exports.run = async (client, message, args) => {
             } else {
                 message.channel.send('Gold must be a valid number!');
             }
+            break;
+        case "battle":
+            battlejs.triggerBattle(message,player);
             break;
     }
 };
