@@ -6,7 +6,7 @@ module.exports.run = async(client, message, args) => {
 	if(data.location == 'Spawn') {
 		message.channel.send('There are no dungeons in spawn! Try travelling somewhere else!');
 	} else {
-		adventure.beginAdventure(message.author);
+		adventure.beginAdventure(message, message.author);
 		message.channel.send("You have begun your adventure!");
 	}
 }
