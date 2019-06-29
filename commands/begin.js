@@ -29,7 +29,7 @@ module.exports.run = async(client, message, args) => {
             },
             "fields": [{
                 "name": "Situation!",
-                "value": "React to choose class\n😛 Warrior\n🤔 Rouge"
+                "value": "React to choose class\n<:Sword:593699121852973078>  Warrior\n<:Bow:593699122289180686> Archer\n<:Mace:593699122305826816> Cleric\n<:Staff:593699122440175616> Wizard\n<:Daggers:593699122238717962> Rogue"
             }]
         }
     }
