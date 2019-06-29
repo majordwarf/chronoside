@@ -11,7 +11,7 @@
         "dist": "1",
         "enemies": ["Crazy Monkey"]
     },
-    "spawn": {
+    "Spawn": {
         "dist": "0",
         "enemies": []
     }
