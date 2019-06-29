@@ -35,7 +35,6 @@ exports.travelTo = async (user, destination) => {
         let totalDistance = hubDistance + destinationDistance;
 
         let arrivalTime = time() + (totalDistance * 60);
-        console.log("USER ID: " + user.id);
         let newState = "travel";
         await mysql.setUserData(user.id, `state = "${newState}", stateFinishTime = ${arrivalTime}, destination = "${destination}"`);
         resolve(totalDistance);

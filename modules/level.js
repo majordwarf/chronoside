@@ -56,8 +56,6 @@ let levelUp = async(message, user, newLevel) => {
             intMultiplier = 2;
             break;
     }
-    console.log("newLevel = " + newLevel);
-    console.log("Multipliers (str, agi, int)" + strMultiplier + " " + agiMultiplier + " " + intMultiplier);
     await mysql.setUserData(user.id, `str = ${strMultiplier*newLevel}, agi = ${agiMultiplier*newLevel}, intel = ${intMultiplier*newLevel}`);
     desc = `${user} gained new level! Level ${newLevel}!`
     levelUpMsg = {

@@ -21,23 +21,16 @@ exports.stateCheck = async(message, cmdTime) => {
     let data = await mysql.getUserData(user.id, 'state, stateFinishTime');
     let currentState = data.state;
     let currentStateFinishTime = data.stateFinishTime;
-
-    console.log("User state = " + currentState);
-    console.log("User finish time = " + currentStateFinishTime);
-    console.log("Current time = " + time());
     if (currentState == "idle") {
-        console.log("User is idle!");
         return;
     } else if (currentStateFinishTime <= time()) {
         // Indicates the state has finished!
         // Perform final-transition steps
         switch (currentState) {
             case "adventure":
-                console.log("Adventure finished");
                 adventurejs.finish(user, message);
                 break;
             case "travel":
-                console.log("Travel finished");
                 traveljs.finish(user, message);
                 break;
         }
