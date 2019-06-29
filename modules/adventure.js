@@ -60,7 +60,8 @@ let result = (message, prob) => {
 
 }
 
-exports.beginAdventure = async(user) => {
+
+exports.beginAdventure = async(message, user) => {
     let data = await mysql.getUserData(user.id, 'location, level');
     let currentLocation = data.location;
     let userLevel = data.level;
@@ -69,6 +70,34 @@ exports.beginAdventure = async(user) => {
     let timeToComplete = dungeonToEnter.level * 2;
 
     let arrivalTime = time() + (timeToComplete * 60);
+    let successChance = Math.round(calculateProbability(userLevel, dungeont.level)*100);
+    let msg = {
+        "embed": {
+          "title": "Adventure",
+          "description": "Adventuring to " + dungeonToEnter.name,
+          "color": 580271,
+          "thumbnail": {
+            "url": dungeonToEnter.sprite
+          },
+          "author": {
+            "name": "Chronoside Bot",
+            "url": ""
+          },
+          "fields": [
+            {
+            "name": "Success rate",
+            "value": "You have a " + successChance + "% chance to succeed!",
+            "inline": true
+            },
+            {
+            "name": "Completion time",
+            "value": "You will complete the adventure in " + Math.round(arrivaTime - time()/60) + " minutes!",
+            "inline": true
+            }
+          ]
+        }
+      }
+      message.channel.send(msg);
     await mysql.setUserData(user.id, `state = "adventure", stateFinishTime = ${arrivalTime}, destination = "${destination}"`);
 }
 
