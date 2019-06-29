@@ -60,59 +60,40 @@ let result = (message, prob) => {
 
 }
 
-
-
-// Function to call when the user gives !travel command
 exports.beginAdventure = async(user) => {
-    // 
-    // 
-
     let data = await mysql.getUserData(user.id, 'location, level');
     let currentLocation = data.location;
     let userLevel = data.level;
     let dungeonToEnter = getDungeon(currentLocation);
     let destination = currentLocation;
-
-    // Dungeon details
-    console.log("Entering dungeon: " + dungeonToEnter.name + " \n Level: " + dungeonToEnter.level + "\n Probability to success: " + calculateProbability(userLevel, dungeonToEnter.level));
-
     let timeToComplete = dungeonToEnter.level * 2;
 
     let arrivalTime = time() + (timeToComplete * 60);
     await mysql.setUserData(user.id, `state = "adventure", stateFinishTime = ${arrivalTime}, destination = "${destination}"`);
-
 }
 
 exports.finish = async(user, message) => {
-    // This is supposed to be ran when the "state-checker" finds that the "adventure" state has finished
-
-
     let data = await mysql.getUserData(user.id, 'location, level');
     let currentLocation = data.location;
     let userLevel = data.level;
     let dungeonToEnter = getDungeon(currentLocation);
     let destination = currentLocation;
-
-
     let requiredProb = calculateProbability(userLevel, dungeonToEnter.level);
     let goldEarned = getGoldReward(userLevel, dungeonToEnter.level);
     let xpEarned = getXPReward(userLevel, dungeonToEnter.level);
 
     if (Math.random() <= requiredProb) {
         // Indicates success!
-
         // Add gold reward!
         await mysql.updateUserData(user.id, 'gold', goldEarned);
         // Add XP reward!
         await mysql.updateUserData(user.id, 'xp', xpEarned);
         let prob = `Mission success! ${goldEarned}Gold and ${xpEarned}XP Earned`;
         result(message, prob);
-        console.log("Mission success! Gold and XP Earned!");
     } else {
         // Indicates failure :'(
         let prob = `Mission failed! Better luck next time!`;
         result(message, prob);
-        console.log("You failed! Try next time!");
     }
 
     // Change the state back to idle - MOVED TO STATE FINISH SYSTEM!

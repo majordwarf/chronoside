@@ -58,12 +58,9 @@ exports.triggerBattle = async(message, user) => {
     let playerState = data.state;
 
     let allEnemies = cities[playerLocation].enemies;
-    console.log("All enemies: " + allEnemies);
     let enemyNumber = getRandomNumber(0,allEnemies.length);
 
     let currentEnemy = enemies[allEnemies[enemyNumber]];
-    console.log("Player state: " + playerState);
-    console.log("You are fighting: " + currentEnemy.name);
 
     let playerMaxHP = getMaxHP(playerStr);
     let enemyMaxHP = getMaxHP(currentEnemy.level*2);
@@ -109,8 +106,6 @@ exports.triggerBattle = async(message, user) => {
             errors: ['time']
         });
         reactions.on('collect', async(reaction, reactions) => {
-            console.log('got a reaction');
-            console.log(reaction.count);
             let enemyDamage = calculateDamage(playerLevel, currentEnemy.level);
             playerCurrentHP -= enemyDamage;
             let enemyCombatMsg = "\nEnemy dealt " + enemyDamage + " to the player!";
@@ -137,7 +132,6 @@ exports.triggerBattle = async(message, user) => {
                     await mysql.setUserData(user.id, 'state = "idle"');
                     sentMsg.clearReactions();
                 }
-                console.log("Dealt damage!" + damage);
                 msg = {
                     "embed": {
                     "title": "Battle",
@@ -225,11 +219,4 @@ exports.triggerBattle = async(message, user) => {
             }
             reaction.remove(user);
         });
-
-        reactions.on('end', collected => {
-            // Indicates battle end. Player did not defeat the enemy in time limit!
-            console.log("Player failed to defeat enemy in time limit");
-            console.log(`collected ${collected.size} reactions`);
-        });
-
 }

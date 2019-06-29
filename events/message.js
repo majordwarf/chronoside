@@ -20,9 +20,7 @@ module.exports = async (client, message) => {
   // WIP: Check if the state of the user has finished (if not idle)!
   let exists = await mysql.checkUserExists(message.author.id);
   if(exists) {
-    console.log("State check INC")
     stateChecker.stateCheck(message, Math.floor(new Date()/1000));
-    console.log("State check OUT")
   }
   await cmd.run(client, message, args);
 };
