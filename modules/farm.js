@@ -28,7 +28,6 @@ exports.upgrade = async user => {
     return new Promise(async (resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'farm');
         let farm = data.farm;
-        console.log(farm + 1)
         if (farm >= farms.length) {
             resolve(0);
         }
