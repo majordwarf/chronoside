@@ -44,7 +44,7 @@ Commands - ( `!` - Prefix )
 ---
 - `farm list` - Shows you a list of farm upgrades.
 - `farm buy` - To buy a farm patch with 50 gold.
-- `farm upgrage` - Upgrade your current farm level.
+- `farm upgrade` - Upgrade your current farm level.
 - `farm collect` - Collect your hourly generated gold from the farm.
 ---
 - `travel cityName` - Travel to the city specified. List of city you can travel -
@@ -57,7 +57,7 @@ Commands - ( `!` - Prefix )
 ---
 - `adventure` - Let's you make your character go in a dungeon while begin AFK to gather gold.
 ---
-- `cheats` - Cheat for development debugging proccess. Arguments available -
+- `cheats` - Cheat for development debugging process. Arguments available -
 	- `gainxp amount` - Gives you the amount of XP specified.
 	- `travel cityName` - Instant teleport to the city specified.
 	- `gaingold amount` - Gives you the amount of gold specified.
