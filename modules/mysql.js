@@ -28,8 +28,8 @@ exports.setupDB = () => {
                     gold INT DEFAULT '0',
                     state VARCHAR(100) DEFAULT 'idle',
                     stateFinishTime VARCHAR(25),
-                    farm INT,
-                    lastCollected DATETIME,
+                    farm INT DEFAULT '0',
+                    lastCollected BIGINT,
                     inventory VARCHAR(100),
                     backpack VARCHAR(100),
                     embed_id BIGINT NOT NULL,
@@ -46,9 +46,25 @@ exports.setupDB = () => {
     });
 }
 
-exports.addUser = (userID, charName, charClass) => {
+exports.checkUserExists = userID => {
     return new Promise((resolve, reject) => {
-        db.query(`INSERT INTO players (id, charname, class) VALUES (${userID}, "${charName}", "${charClass}")`, (error, results) => {
+        db.query(`SELECT * FROM players WHERE id = ${userID}`, (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                if(results[0] === undefined) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            }
+        });
+    });
+}
+
+exports.addUser = (userID, charName, charClass, embedId) => {
+    return new Promise((resolve, reject) => {
+        db.query(`INSERT INTO players (id, charname, class, embed_id) VALUES (${userID}, "${charName}", "${charClass}", ${embedId})`, (error, results) => {
             if (error) {
                 reject(error);
             } else {

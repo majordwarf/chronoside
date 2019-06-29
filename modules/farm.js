@@ -7,10 +7,10 @@ let time = () => {
 
 exports.collect = async user => {
     return new Promise(async (resolve, reject) => {
-        let data = await mysql.getUserData(user.id, 'farm, last_collected');
+        let data = await mysql.getUserData(user.id, 'farm, lastCollected');
         let farm = data.farm;
-        let last_collected = data.last_collected;
-        let hours = Math.floor((time() - last_collected) / 3600);
+        let lastCollected = data.lastCollected;
+        let hours = Math.floor((time() - lastCollected) / 3600);
         if (hours === 0) {
             resolve(0);
         }
@@ -19,7 +19,7 @@ exports.collect = async user => {
             earnings = farms[farm - 1].cap;
         }
         await mysql.updateUserData(user.id, 'gold', earnings);
-        await mysql.setUserData(user.id, `last_collected = ${time()}`);
+        await mysql.setUserData(user.id, `lastCollected = ${time()}`);
         resolve(earnings);
     });
 }
@@ -28,12 +28,13 @@ exports.upgrade = async user => {
     return new Promise(async (resolve, reject) => {
         let data = await mysql.getUserData(user.id, 'farm');
         let farm = data.farm;
+        console.log(farm + 1)
         if (farm >= farms.length) {
             resolve(0);
         }
         await mysql.updateUserData(user.id, 'farm', 1);
         await mysql.updateUserData(user.id, 'gold', farms[farm].price * -1);
-        resolve(farm);
+        resolve(farm + 1);
     });
 }
 
@@ -42,7 +43,7 @@ exports.buy = async user => {
         let data = await mysql.getUserData(user.id, 'farm');
         let farm = data.farm;
         if (farm === 0) {
-            await mysql.setUserData(user.id, `farm = 1, last_collected = ${time()}`);
+            await mysql.setUserData(user.id, `farm = 1, lastCollected = ${time()}`);
             await mysql.updateUserData(user.id, 'gold', farms[0].price * -1);
             resolve(farms[0].price);
         }
