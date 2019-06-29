@@ -1,5 +1,6 @@
 const mysql = require('./mysql.js');
 const dungeons = require('../data/dungeons.json');
+const level = require('./level.js');
 
 /*
 
@@ -85,17 +86,15 @@ exports.finish = async(user, message) => {
     if (Math.random() <= requiredProb) {
         // Indicates success!
         // Add gold reward!
-        await mysql.updateUserData(user.id, 'gold', goldEarned);
+        level.gainGold(user, goldEarned);
         // Add XP reward!
-        await mysql.updateUserData(user.id, 'xp', xpEarned);
-        let prob = `Mission success! ${goldEarned}Gold and ${xpEarned}XP Earned`;
+        level.gainXP(user, xpEarned);
+        let prob = `Mission success! Gained ${goldEarned} gold and ${xpEarned} XP`;
         result(message, prob);
     } else {
         // Indicates failure :'(
         let prob = `Mission failed! Better luck next time!`;
         result(message, prob);
     }
-
     // Change the state back to idle - MOVED TO STATE FINISH SYSTEM!
-
 }

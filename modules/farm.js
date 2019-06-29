@@ -1,5 +1,6 @@
 const mysql = require('./mysql.js');
 const farms = require('../data/farms.json');
+const level = require('./level.js');
 
 let time = () => {
     return Math.floor(new Date() / 1000);
@@ -18,7 +19,7 @@ exports.collect = async user => {
         if (earnings > farms[farm - 1].cap) {
             earnings = farms[farm - 1].cap;
         }
-        await mysql.updateUserData(user.id, 'gold', earnings);
+        level.gainGold(user, earnings);
         await mysql.setUserData(user.id, `lastCollected = ${time()}`);
         resolve(earnings);
     });
@@ -32,7 +33,7 @@ exports.upgrade = async user => {
             resolve(0);
         }
         await mysql.updateUserData(user.id, 'farm', 1);
-        await mysql.updateUserData(user.id, 'gold', farms[farm].price * -1);
+        level.gainGold(user, farms[farm].price * -1);
         resolve(farm + 1);
     });
 }
@@ -43,7 +44,7 @@ exports.buy = async user => {
         let farm = data.farm;
         if (farm === 0) {
             await mysql.setUserData(user.id, `farm = 1, lastCollected = ${time()}`);
-            await mysql.updateUserData(user.id, 'gold', farms[0].price * -1);
+            level.gainGold(user, farms[0].price * -1);
             resolve(farms[0].price);
         }
         resolve(0);

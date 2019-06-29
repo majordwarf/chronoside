@@ -1,4 +1,5 @@
 const mysql = require('./mysql.js');
+const level = require('./level.js');
 const cities = require('../data/cities.json');
 const enemies = require('../data/enemies.json');
 
@@ -121,14 +122,14 @@ exports.triggerBattle = async(message, user) => {
                     let xpEarned = (currentEnemy.xp*currentEnemy.level);
                     combatLog = "Player defeated enemy! BATTLE WON!\nGold Earned: " + goldEarned + "\nXP Earned: " + xpEarned;
                     await mysql.setUserData(user.id, `state = "idle"`);
-                    await mysql.updateUserData(user.id, 'gold', goldEarned);
-                    await mysql.updateUserData(user.id, 'xp', xpEarned);
+                    level.gainGold(user, goldEarned);
+                    level.gainXP(user, xpEarned);
                     sentMsg.clearReactions();
                 } else if(playerCurrentHP <= 0) {
                     playerCurrentHP = 0;
                     let penaltyGold = Math.round(currentEnemy.xp/currentEnemy.level)*-1;
                     combatLog = "Player was defeated by the enemy! BATTLE LOST!\n Penalty of " + penaltyGold + " gold were deducted from your balance!";
-                    await mysql.updateUserData(user.id, 'gold', penaltyGold);
+                    level.gainGold(user, penaltyGold);
                     await mysql.setUserData(user.id, 'state = "idle"');
                     sentMsg.clearReactions();
                 }

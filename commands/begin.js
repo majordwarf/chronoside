@@ -107,14 +107,21 @@ module.exports.run = async(client, message, args) => {
                         "name": `${args[1]}'s profile`,
                         "url": ""
                     },
-                    "fields": [{
-                        "name": "Progress",
-                        "value": `Level: 1\nXP: 0\nArea: CityA`,
-                        "inline": true
-                    }, {
-                        "name": "Money",
-                        "value": "<:Coin:593699122473730063>: 0"
-                    }]
+                    "fields": [
+                        {
+                            "name": "Progress",
+                            "value": `Level: 1\nXP: 0\nArea: Spawn`,
+                            "inline": true
+                        },
+                        {
+                            "name": "Gold",
+                            "value": "<:Coin:593699122473730063>: 0"
+                        },
+                        {
+                            "name": "Inventory",
+                            "value": "No items"
+                        }
+                    ]
                 }
             }
 

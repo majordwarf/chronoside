@@ -2,7 +2,7 @@ const mysql = require('../modules/mysql.js');
 const cities = require('../data/cities.json');
 
 module.exports.run = async(client, message, args) => {
-	if(!cities[args[1]]) {
+	if(!cities[args[0]]) {
         await message.channel.send(`City by the name of ${args[1]} does not exist!`);
     } else {
         let travelTime = await traveljs.travelTo(player, args[1]);

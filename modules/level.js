@@ -1,4 +1,5 @@
 const mysql = require('./mysql.js');
+const EmbedManager = require('./EmbedManager.js');
 
 /*
 
@@ -105,10 +106,27 @@ exports.gainXP = async(message, user, xpAmount) => {
     }
     await message.channel.send(levelUpMsg);
 
+    let embedMsg = await EmbedManager.get(user);
+    let embed = embedMsg.embeds[0];
+    let values = embed.fields[0].value.split('\n');
+    values[0] = `Level: ${newLevel}`;
+    values[1] = `XP: ${newXP}`;
+    embed.fields[0].value = values.join('\n');
+    await EmbedManager.edit(user, embed);
+
     await mysql.setUserData(user.id, `xp = ${newXP}`);
     if (currentLevel != newLevel) {
         levelUp(message, user, newLevel);
     }
+}
+
+exports.gainGold = async(user, goldAmount) => {
+    await mysql.updateUserData(user.id, 'gold', goldAmount);
+    let data = await mysql.getUserData(user.id, 'gold');
+    let embedMsg = await EmbedManager.get(user);
+    let embed = embedMsg.embeds[0];
+    embed.fields[1].value = `<:Coin:593699122473730063>: ${data.gold}`;
+    await EmbedManager.edit(user, embed);
 }
 
 /*

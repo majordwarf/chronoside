@@ -1,5 +1,6 @@
 const mysql = require('./mysql.js');
 const battle = require('./battle.js');
+const level = require('./level.js');
 
 exports.explore = async (message, user) => {
 	let exploreRand = Math.random();
@@ -14,7 +15,7 @@ exports.explore = async (message, user) => {
 	} else {
 		let data = await mysql.getUserData(user.id, 'level');
 		let gold = Math.ceil(Math.random() * 5 * data.level);
-		await mysql.updateUserData(user.id, 'gold', gold);
+		level.gainGold(user, gold);
 		message.channel.send(`Wow! You found ${gold} gold!`);
 		return gold;
 	}
