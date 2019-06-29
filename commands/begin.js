@@ -5,11 +5,8 @@ module.exports.run = async(client, message, args) => {
     storyMsg = {
         "embed": {
             "title": "The New Dawn",
-            "description": "Blah Blah Blah...",
+            "description": "A long long time ago the peaceful land of Wumpus was captured by an evil spirit.",
             "color": 16711680,
-            "image": {
-                "url": "https://cdn.discordapp.com/embed/avatars/0.png"
-            },
             "author": {
                 "name": "Chronoside Bot",
                 "url": ""
@@ -23,12 +20,9 @@ module.exports.run = async(client, message, args) => {
 
     classMsg = {
         "embed": {
-            "title": "The Dragon Attacks",
-            "description": "Blah Blah Blah...",
+            "title": "The Evil Spirit Attacks",
+            "description": "On a peaceful day when you were in your army training the evil spirit attacked the camp. You saw 5 weapons, which one do you pickup?\nA Sword\nA Bow\nA Mace\nA Staff\nDaggers",
             "color": 16711680,
-            "image": {
-                "url": "https://cdn.discordapp.com/embed/avatars/0.png"
-            },
             "author": {
                 "name": "Chronoside Bot",
                 "url": ""
@@ -54,8 +48,11 @@ module.exports.run = async(client, message, args) => {
         args = nameMess.first().content.slice(1).trim().split(/ +/g);
         await message.author.send(`Your name is ${args[1]}.`);
         let classMess = await message.author.send(classMsg);
-        await classMess.react("😛");
-        await classMess.react("🤔");
+        await classMess.react("593699121852973078");
+        await classMess.react("593699122289180686");
+        await classMess.react("593699122305826816");
+        await classMess.react("593699122440175616");
+        await classMess.react("593699122238717962");
 
         let reactions = await classMess.createReactionCollector(r => r.emoji = ("😛" || "🤔") && r.users.size > 1, {
             max: 1,
@@ -63,14 +60,36 @@ module.exports.run = async(client, message, args) => {
             errors: ['time']
         });
         reactions.on('collect', async(reaction, reactions) => {
-            let userClass;
-            if (reaction.emoji.name === '😛' && reaction.count > 1) {
-                await classMess.reply(`${args[1]} you are a warrior with id ${userID}`);
+            let userClass = "";
+            if (reaction.emoji.name === '593699121852973078' && reaction.count > 1) {
+                await classMess.reply(`${args[1]} you are a warrior!`);
                 userClass = "Warrior";
-            } else if (reaction.emoji.name === '🤔' && reaction.count > 1) {
-                await classMess.reply('you are a rouge.');
+            } else if (reaction.emoji.name === '593699122289180686' && reaction.count > 1) {
+                await classMess.reply(`${args[1]} you are a Archer!`);
+                userClass = "Archer";
+            } else if (reaction.emoji.name === '593699122305826816' && reaction.count > 1) {
+                await classMess.reply(`${args[1]} you are a Mace!`);
+                userClass = "Cleric";
+            } else if (reaction.emoji.name === '593699122440175616' && reaction.count > 1) {
+                await classMess.reply(`${args[1]} you are a Wizard!`);
+                userClass = "Wizard";
+            } else if (reaction.emoji.name === '593699122238717962' && reaction.count > 1) {
+                await classMess.reply(`${args[1]} you are a Rouge!`);
                 userClass = "Rouge";
             }
+
+            let finishEmbed = {
+                    "embed": {
+                        "title": "You escape!",
+                        "description": "You fight bravely but the dragon was too powerful! You decide to escape the scene and travel to the nearest safe city for help.",
+                        "color": 16711680,
+                        "author": {
+                            "name": "Chronoside Bot",
+                            "url": ""
+                        }
+                    }
+                }
+
             let infoEmbed = {
                 "embed": {
                     "title": `${userClass}`,
@@ -93,6 +112,7 @@ module.exports.run = async(client, message, args) => {
                 }
             }
 
+            let finishEmbedMsg = await classMess.channel.send(finishEmbed);
             let infoEmbedMsg = await classMess.channel.send(infoEmbed);
             mysql.addUser(userID, args[1], userClass, infoEmbedMsg.id);
         });
