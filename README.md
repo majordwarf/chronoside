@@ -1,3 +1,4 @@
+
 <h1 align="center">Chronoside</h1>
 
 <h5 align="center">Chronoside is a text-based multiplayer fantasy role playing game (RPG) developed as a Discord Bot.</h5>
@@ -26,15 +27,44 @@
 - Clone the repository `git clone https://github.com/majordwarf/chronoside`
 - Navigate inside the repository `cd chronoside`
 - Install the dependencies ( yarn is recommended ) `yarn`
+- Setup you `mysql` server locally
+- Make a copy of `config.json.example` and rename it to `config.json`
 - Change the config data inside `config.json`
 - Run the bot `yarn start`
 
 <h2 id="help">Help</h2>
 
-Commands - ( `$` - Prefix )
+```
+YOU WON'T BE ABLE TO EXECUTE ANY COMMANDS WHILE TRAVELLING OR WHEN ON ADVENTURE.
+YOU NEED TO EXECUTE A COMMAND WHEN TO TRIGGER THE CHECK IF THE CURRENT ACTIVITY [travelling or adventure] is completed or not.
+```
+Commands - ( `!` - Prefix )
 
-- `start` - Starts character creator to begin your adventure.
-
+- `begin` - Starts character creator to begin your adventure.
+---
+- `farm list` - Shows you a list of farm upgrades.
+- `farm buy` - To buy a farm patch with 50 gold.
+- `farm upgrage` - Upgrade your current farm level.
+- `farm collect` - Collect your hourly generated gold from the farm.
+---
+- `travel cityName` - Travel to the city specified. List of city you can travel -
+	- Erysall
+	- Qrita
+	- Calbury
+	- Spawn
+---
+- `explore` - Explores the current city. You have chance to find hidden loot or encounter mobs while exploring.
+---
+- `adventure` - Let's you make your character go in a dungeon while begin AFK to gather gold.
+---
+- `cheats` - Cheat for development debugging proccess. Arguments available -
+	- `gainxp amount` - Gives you the amount of XP specified.
+	- `travel cityName` - Instant teleport to the city specified.
+	- `gaingold amount` - Gives you the amount of gold specified.
+	- `battle` - Triggers battle with random mobs without needing to explpore.
+---
+- `stats` - Show the server statistics.
+---
 
 <h2 id="testing">Testing</h2>
 
