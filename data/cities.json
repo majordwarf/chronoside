@@ -1,14 +1,18 @@
 {
     "CityA": {
-        "dist": "5"
+        "dist": "5",
+        "enemies": ["Ancient Mummy", "Crazy Monkey", "Elastic Snake"]
     },
     "CityB": {
-        "dist": "7"
+        "dist": "7",
+        "enemies": ["Big Goblin", "Double Magician"]
     },
     "CityC": {
-        "dist": "1"
+        "dist": "1",
+        "enemies": ["Crazy Monkey"]
     },
     "Spawn": {
-        "dist": "0"
+        "dist": "0",
+        "enemies": []
     }
 }
