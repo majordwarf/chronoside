@@ -54,7 +54,7 @@ module.exports.run = async(client, message, args) => {
         await classMess.react("593699122440175616");
         await classMess.react("593699122238717962");
 
-        let reactions = await classMess.createReactionCollector(r => r.emoji = ("😛" || "🤔") && r.users.size > 1, {
+        let reactions = await classMess.createReactionCollector(r => r.emoji = ("593699121852973078" || "593699122289180686" || "593699122305826816" || "593699122440175616" || "593699122238717962") && r.users.size > 1, {
             max: 1,
             time: 12000,
             errors: ['time']
