@@ -36,7 +36,7 @@ module.exports.run = async (client, message, args) => {
             }
             break;
         case "battle":
-            battlejs.triggerBattle(message,player);
+            battlejs.triggerBattle(message, player);
             break;
     }
 };

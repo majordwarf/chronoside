@@ -1,14 +1,17 @@
 {
     "CityA": {
         "name": "Burnt Armory",
-        "level": "1"
+        "level": "1",
+        "sprite": "https://cdn.discordapp.com/attachments/592199620231299088/592277293842300939/Untitled-2.gif"
     },
     "CityB": {
         "name": "Overgrown Paradise",
-        "level": "2"
+        "level": "2",
+        "sprite": "https://cdn.discordapp.com/attachments/592199620231299088/592277293842300939/Untitled-2.gif"
     },
     "CityC": {
         "name": "Mountain Chambers",
-        "level": "3"
+        "level": "3",
+        "sprite": "https://cdn.discordapp.com/attachments/592199620231299088/592277293842300939/Untitled-2.gif"
     }
 }
