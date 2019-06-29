@@ -25,11 +25,14 @@ let getDistance = (user, destination) => {
 }
 
 // Function to call when the user gives !travel command
-exports.travelTo = async (user, destination) => {
+exports.travelTo = async(user, destination) => {
     // Get distance between user's current location and destination
     // Set data (State, ArrivalTime, Desination)
-    return new Promise(async (resolve, reject) => {
-        let data = await mysql.getUserData(user.id, 'location');
+    return new Promise(async(resolve, reject) => {
+        let data = await mysql.getUserData(user.id, 'location, state');
+        if (state == "idle") {
+            return;
+        }
         let currentLocation = data.location;
         let hubDistance = getDistance(user, currentLocation);
         let destinationDistance = getDistance(user, destination);
@@ -73,7 +76,7 @@ exports.finish = async(user, message) => {
     */
 }
 
-exports.cheat = async (user, destination) => {
+exports.cheat = async(user, destination) => {
     await mysql.setUserData(user.id, `location = "${destination}", destination = "${destination}"`);
     /*
     let embedMsg = await EmbedManager.get(user);
