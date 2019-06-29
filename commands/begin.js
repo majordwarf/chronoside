@@ -62,20 +62,20 @@ module.exports.run = async(client, message, args) => {
         reactions.on('collect', async(reaction, reactions) => {
             let userClass = "";
             if (reaction.emoji.name === '593699121852973078' && reaction.count > 1) {
-                await classMess.reply(`${args[1]} you are a warrior!`);
+                await classMess.reply(`${args[1]} you are a Warrior!`);
                 userClass = "Warrior";
             } else if (reaction.emoji.name === '593699122289180686' && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Archer!`);
                 userClass = "Archer";
             } else if (reaction.emoji.name === '593699122305826816' && reaction.count > 1) {
-                await classMess.reply(`${args[1]} you are a Mace!`);
+                await classMess.reply(`${args[1]} you are a Cleric!`);
                 userClass = "Cleric";
             } else if (reaction.emoji.name === '593699122440175616' && reaction.count > 1) {
                 await classMess.reply(`${args[1]} you are a Wizard!`);
                 userClass = "Wizard";
             } else if (reaction.emoji.name === '593699122238717962' && reaction.count > 1) {
-                await classMess.reply(`${args[1]} you are a Rouge!`);
-                userClass = "Rouge";
+                await classMess.reply(`${args[1]} you are a Rogue!`);
+                userClass = "Rogue";
             }
 
             let finishEmbed = {
@@ -86,7 +86,13 @@ module.exports.run = async(client, message, args) => {
                         "author": {
                             "name": "Chronoside Bot",
                             "url": ""
-                        }
+                        },
+                        "fields": [
+                            {
+                                "name": "Welcome!",
+                                "value": 'You have begun your journey! We wish you the best of luck! Now what do you do? Well, let me show you around.\nThe first thing you may want to do is travel from the spawn area. You will not find dungeons and enemies in spawn. To do this, type `' + prefix + 'travel (cityname)` You can get a list of the cities by typing `' + prefix + 'map`\n'
+                            }
+                        ]
                     }
                 }
 
