@@ -1,5 +1,6 @@
 
 const stateChecker = require('../modules/state.js');
+const mysql = require('../modules/mysql.js');
 
 module.exports = async (client, message) => {
   // Ignore if user of message is a bot.
@@ -17,8 +18,11 @@ module.exports = async (client, message) => {
   // TODO: Check if the command given by user can be executed in user's current state, if yes, execute
 
   // WIP: Check if the state of the user has finished (if not idle)!
-  console.log("State check INC")
-  stateChecker.stateCheck(message.author, Math.floor(new Date()/1000));
-  console.log("State check OUT")
+  let exists = await mysql.checkUserExists(message.author.id);
+  if(exists) {
+    console.log("State check INC")
+    stateChecker.stateCheck(message, Math.floor(new Date()/1000));
+    console.log("State check OUT")
+  }
   await cmd.run(client, message, args);
 };
