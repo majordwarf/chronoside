@@ -5,10 +5,8 @@
 <h5 align="center">This bot was developed as an entry for <a href="https://blog.discordapp.com/discord-community-hack-week-build-and-create-alongside-us-6b2a7b7bba33">Discord's Hack Week</a>.</h5>
 
 [![status](https://img.shields.io/badge/status-pre--alpha-red.svg)](https://github.com/majordwarf/chronoside)
-[![Build Status](https://travis-ci.org/majordwarf/chronoside.svg?branch=master)](https://travis-ci.org/majordwarf/chronoside)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![GitHub issues](https://img.shields.io/github/issues/majordwarf/chronoside.svg)](https://github.com/majordwarf/chronoside/issues/)
-[![Discord Invite](https://img.shields.io/badge/discord-invite-blue.svg)](https://discordapp.com/oauth2/authorize?client_id=594275763226673213&scope=bot&permissions=8)
 
 ---
 
